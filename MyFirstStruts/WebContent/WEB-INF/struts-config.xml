@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config 
+PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.0//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+	<form-beans type="org.apache.struts.action.ActionFormBean">
+		<form-bean name="loginForm" type="mywebapp.bean.form.LoginForm" />
+	</form-beans>
+
+	<action-mappings type="org.apache.struts.action.ActionMapping">
+		<action path="/login" parameter="" input="/index.jsp" scope="request"
+			name="loginForm" type="mywebapp.action.LoginAction">
+			<forward name="succes" path="/catalogue.do" redirect="true" />
+			<forward name="echec" path="/jsp/index.jsp" redirect="false" />
+		</action>
+		<action path="/catalogue" parameter="" scope="request"
+			name="catalogue" type="mywebapp.action.CatalogueAction">
+			<forward name="catalogue" path="/jsp/catalogue.jsp" redirect="false" />
+		</action>
+		<action path="/panier" parameter="" scope="request"
+			name="panier" type="mywebapp.action.AfficherPanierAction">
+			<forward name="panier" path="/jsp/panier.jsp" redirect="false" />
+		</action>
+		<action path="/ajouter" parameter="" scope="request"
+			name="ajouter" type="mywebapp.action.AjouterDansPanierAction">
+			<forward name="panier" path="/catalogue.do" redirect="false" />
+		</action>
+		<action path="/retirer" parameter="" scope="request"
+			name="retirer" type="mywebapp.action.RetirerDuPanierAction">
+			<forward name="panier" path="/panier.do" redirect="false" />
+		</action>
+		<action path="/vider" parameter="" scope="request"
+			name="vider" type="mywebapp.action.ViderPanierAction">
+			<forward name="panier" path="/catalogue.do" redirect="false" />
+		</action>
+	</action-mappings>
+
+	<message-resources parameter=".i18n.message" />
+</struts-config>
+ 
