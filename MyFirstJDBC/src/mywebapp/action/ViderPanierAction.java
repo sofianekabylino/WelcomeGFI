@@ -21,11 +21,12 @@ import org.apache.struts.action.ActionMapping;
 public class ViderPanierAction extends Action {
 
 	@Override
-	public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest req, final HttpServletResponse res) {
-		IPanierServices panierServices = (IPanierServices) MyFactory.getInstance(IPanierServices.class);
-		final Map<Integer, Integer> panier = (Map<Integer, Integer>) req.getSession().getAttribute("panier");
+	public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest req,
+			final HttpServletResponse res) {
+		final IPanierServices panierServices = (IPanierServices) MyFactory.getInstance(IPanierServices.class);
+		final Map<Integer, Integer> panier = (Map<Integer, Integer>) req.getSession().getAttribute(LoginAction.ATTR_PANIER_SESSION);
 		panierServices.viderPanier(panier);
-		req.getSession().setAttribute("panier", panier);
-		return mapping.findForward("succes");
+		req.getSession().setAttribute(LoginAction.ATTR_PANIER, panier);
+		return mapping.findForward(LoginAction.MSG_SUCCES);
 	}
 }

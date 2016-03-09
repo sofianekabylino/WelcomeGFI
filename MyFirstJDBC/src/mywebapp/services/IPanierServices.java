@@ -19,7 +19,7 @@ public interface IPanierServices {
 	 * 
 	 * @param panier
 	 */
-	void viderPanier(Map<Integer, Integer> panier);
+	void viderPanier(final Map<Integer, Integer> panier);
 
 	/**
 	 * Ajoute un produit dans le panier.
@@ -29,7 +29,7 @@ public interface IPanierServices {
 	 * @param reference
 	 *            la référence à ajouter.
 	 */
-	void ajouterDansPanier(Map<Integer, Integer> panier, int reference);
+	void ajouterDansPanier(final Map<Integer, Integer> panier, int reference);
 
 	/**
 	 * supprimmer un produit d'un panier
@@ -37,7 +37,7 @@ public interface IPanierServices {
 	 * @param panier
 	 * @param reference
 	 */
-	void retirerDuPanier(Map<Integer, Integer> panier, int reference);
+	void retirerDuPanier(final Map<Integer, Integer> panier, int reference);
 
 	/**
 	 * retourne le nombre d'article dans un panier
@@ -45,6 +45,6 @@ public interface IPanierServices {
 	 * @param panier
 	 * @return nombre d'article dans un panier
 	 */
-	int nbArticleDansPanier(Map<Integer, Integer> panier);
+	int nbArticleDansPanier(final Map<Integer, Integer> panier);
 
 }

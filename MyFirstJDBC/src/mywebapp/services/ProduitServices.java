@@ -1,10 +1,13 @@
 package mywebapp.services;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import mywebapp.bean.data.ProduitDTO;
+import mywebapp.exceptions.DAOException;
 import mywebapp.persistance.dao.IProduitDAO;
+import mywebapp.persistance.data.ProduitDO;
 import mywebapp.utils.MyFactory;
 
 /**
@@ -13,10 +16,9 @@ import mywebapp.utils.MyFactory;
  */
 public class ProduitServices implements IProduitServices {
 	private static IProduitServices instance = new ProduitServices();
-	private static final Map<Integer, ProduitDTO> catalogue = new HashMap<Integer, ProduitDTO>();
 
 	/**
-	 * constructeur privï¿½ pour construir un singleton
+	 * constructeur privé pour construir un singleton
 	 */
 	private ProduitServices() {
 		// Constructeur vide
@@ -27,23 +29,23 @@ public class ProduitServices implements IProduitServices {
 	}
 
 	@Override
-	public Map<Integer, ProduitDTO> recupererCatalogue() {
-		initCatalogue();
+	public Map<Integer, ProduitDTO> recupererCatalogue() throws DAOException {
+		IProduitDAO produitDAO = (IProduitDAO) MyFactory.getInstance(IProduitDAO.class);
+		Map<Integer, ProduitDTO> catalogue = new HashMap<Integer, ProduitDTO>();
+		List<ProduitDO> listeProduitDO = produitDAO.recupereCatalogueBDD();
+		for (ProduitDO p : listeProduitDO) {
+			ProduitDTO produitDTO = new ProduitDTO(p.getId(), p.getLibelle(), p.getPrix());
+			catalogue.put(produitDTO.getIdProduit(), produitDTO);
+		}
 		return catalogue;
 	}
 
-	private void initCatalogue() {
-		catalogue.put(1, new ProduitDTO(1, "iPhone 6", 700));
-		catalogue.put(2, new ProduitDTO(2, "HTC 620", 220.50));
-		catalogue.put(3, new ProduitDTO(3, "SAMSUNG S6", 650));
-		catalogue.put(4, new ProduitDTO(4, "Microsoft Lumia", 400));
-	}
-
 	@Override
-	public void creerProduit(int id, String nom, double prix) {
+	public void creerProduit(int id, String nom, double prix) throws DAOException {
 		final ProduitDTO produit = new ProduitDTO(id, nom, prix);
 		IProduitDAO produitDAO = (IProduitDAO) MyFactory.getInstance(IProduitDAO.class);
-		produitDAO.creerProduitBDD(produit);
+		ProduitDO produitDO = new ProduitDO(produit.getIdProduit(), produit.getNomProduit(), produit.getPrixProduit());
+		produitDAO.creerProduitBDD(produitDO);
 	}
 
 }

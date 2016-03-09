@@ -17,16 +17,25 @@ import org.apache.struts.action.ActionMapping;
  */
 public final class LoginAction extends Action {
 
+	final static String MSG_SUCCES = "succes";
+	final static String MSG_ECHEC = "echec";
+	final static String ATTR_MESSAGE = "message";
+	static final String ATTR_PANIER_SESSION = "panier";
+	static final String ATTR_PANIER = "panier";
+	static final String ATTR_Nb_ARTICLE = "nbArticles";
+	static final String ATTR_CATALOGUE = "catalogue";
+
 	@Override
-	public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest req, final HttpServletResponse res) throws Exception {
+	public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest req,
+			final HttpServletResponse res) throws Exception {
 		String resultat = null;
 		final String nomUtilisateur = ((LoginForm) form).getNomUtilisateur();
 		final String mdpUtilisateur = ((LoginForm) form).getMdpUtilisateur();
 
 		if (nomUtilisateur.equals("xyz") && mdpUtilisateur.equals("xyz")) {
-			resultat = "succes";
+			resultat = MSG_SUCCES;
 		} else {
-			resultat = "echec";
+			resultat = MSG_ECHEC;
 		}
 		return mapping.findForward(resultat);
 	}

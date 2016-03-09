@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mywebapp.exceptions.DAOException;
 import mywebapp.services.IPanierServices;
 import mywebapp.services.IProduitServices;
-import mywebapp.services.ProduitServices;
 import mywebapp.utils.MyFactory;
 
 import org.apache.struts.action.Action;
@@ -24,19 +24,26 @@ import org.apache.struts.action.ActionMapping;
 public class AfficheCatalogueAction extends Action {
 
 	@Override
-	public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest req, final HttpServletResponse res) {
-		IPanierServices panierServices = (IPanierServices) MyFactory.getInstance(IPanierServices.class);
-		IProduitServices produitService = (IProduitServices) MyFactory.getInstance(IProduitServices.class);
-		final String resultat = "succes";
+	public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest req,
+			final HttpServletResponse res) {
+		final IPanierServices panierServices = (IPanierServices) MyFactory.getInstance(IPanierServices.class);
+		final IProduitServices produitService = (IProduitServices) MyFactory.getInstance(IProduitServices.class);
+		String resultat = LoginAction.MSG_SUCCES;
 		final HttpSession session = req.getSession();
-		Map<Integer, Integer> panier = (Map<Integer, Integer>) session.getAttribute("panier");
+		Map<Integer, Integer> panier = (Map<Integer, Integer>) session.getAttribute(LoginAction.ATTR_PANIER_SESSION);
 		if (panier == null) {
 			panier = panierServices.initPanier();
-			session.setAttribute("panier", panier);
+			session.setAttribute(LoginAction.ATTR_PANIER, panier);
 		}
 		final int nbArticles = panierServices.nbArticleDansPanier(panier);
-		req.setAttribute("nbArticles", nbArticles);
-		req.setAttribute("catalogue", produitService.recupererCatalogue());
+		req.setAttribute(LoginAction.ATTR_Nb_ARTICLE, nbArticles);
+		try {
+			req.setAttribute(LoginAction.ATTR_CATALOGUE, produitService.recupererCatalogue());
+		} catch (final DAOException e) {
+			e.printStackTrace();
+			resultat = LoginAction.MSG_ECHEC;
+			req.setAttribute(LoginAction.ATTR_MESSAGE, e.getMessage());
+		}
 		return mapping.findForward(resultat);
 	}
 }

@@ -17,6 +17,7 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
 		<action path="/afficheCatalogue" scope="request"
 			type="mywebapp.action.AfficheCatalogueAction">
 			<forward name="succes" path="/jsp/catalogue.jsp" redirect="false" />
+			<forward name="echec" path="/jsp/erreur.jsp" redirect="false" />
 		</action>
 		<action path="/affichePanier" scope="request"
 			type="mywebapp.action.AffichePanierAction">
@@ -24,19 +25,21 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
 		</action>
 		<action path="/afficheCreationProduit" scope="request"
 			type="mywebapp.action.AfficheCreationProduitAction">
-			<forward name="succes" path="/jsp/creationProduit.jsp" redirect="false" />
+			<forward name="succes" path="/jsp/creationProduit.jsp"
+				redirect="false" />
 		</action>
-		<action path="/ajoutProduit" scope="request" name="ajoutProduit" 
+		<action path="/ajoutProduit" scope="request" name="ajoutProduit"
 			type="mywebapp.action.ModifiePanierAction">
-            <forward name="succes" path="/afficheCatalogue.do" redirect="false" />
-            <forward name="echec" path="/jsp/erreur.jsp" redirect="false" />
+			<forward name="succes" path="/afficheCatalogue.do" redirect="false" />
+			<forward name="echec" path="/jsp/erreur.jsp" redirect="false" />
 		</action>
-		<action path="/suppressionProduit" scope="request" name="suppressionProduit" 
+		<action path="/suppressionProduit" scope="request" name="suppressionProduit"
 			type="mywebapp.action.ModifiePanierAction">
-            <forward name="succes" path="/affichePanier.do" redirect="false" />
-            <forward name="echec" path="/jsp/erreur.jsp" redirect="false" />
+			<forward name="succes" path="/affichePanier.do" redirect="false" />
+			<forward name="echec" path="/jsp/erreur.jsp" redirect="false" />
 		</action>
-		<action path="/viderPanier"	scope="request" type="mywebapp.action.ViderPanierAction">
+		<action path="/viderPanier" scope="request"
+			type="mywebapp.action.ViderPanierAction">
 			<forward name="succes" path="/afficheCatalogue.do" redirect="false" />
 		</action>
 		<action path="/affichageFormCreationProduit" scope="request"
@@ -46,8 +49,14 @@ PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
 		<action path="/creerProduit" parameter="" input="/jsp/creerProduit.jsp"
 			scope="request" name="creerProduitForm" type="mywebapp.action.CreerProduitAction">
 			<forward name="succes" path="/afficheCatalogue.do" redirect="false" />
+			<forward name="echec" path="/jsp/erreur.jsp" redirect="false" />
 		</action>
-		
+		<action path="/validerCommande" parameter="" scope="request"
+			type="mywebapp.action.ValiderCommandeAction">
+			<forward name="succes" path="/afficheCatalogue.do" redirect="false" />
+			<forward name="echec" path="/jsp/erreur.jsp" redirect="false" />
+		</action>
+
 	</action-mappings>
 	<message-resources parameter=".i18n.message" />
 

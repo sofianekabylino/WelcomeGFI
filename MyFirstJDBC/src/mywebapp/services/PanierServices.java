@@ -4,18 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Classe qui contient l'implementation des methodes
- * de l'interface IPanierServices
+ * Classe qui contient l'implementation des methodes de l'interface
+ * IPanierServices
  */
 public class PanierServices implements IPanierServices {
 
 	private static IPanierServices instance = new PanierServices();
 
 	/**
-	 * Constructeur privé pour construir un singleton
+	 * Constructeur private pour construir un singleton
 	 */
 	private PanierServices() {
-		// Constructeur vide 
+		// Constructeur vide
 	}
 
 	public static IPanierServices getInstance() {

@@ -56,6 +56,11 @@
 					<bean:message key="general.bouton.viderPanier" />
 				</button>
 			</a>
+			<a href="../validerCommande.do">
+				<button type="submit" class="projectButtonTop">
+					<bean:message key="general.bouton.validerPanier" />
+				</button>
+			</a>
 		</p>
 	</div>
 </body>

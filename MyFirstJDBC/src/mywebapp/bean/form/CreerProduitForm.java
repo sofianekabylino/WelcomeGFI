@@ -2,6 +2,7 @@ package mywebapp.bean.form;
 
 import javax.servlet.http.HttpServletRequest;
 
+import mywebapp.exceptions.DAOException;
 import mywebapp.services.IProduitServices;
 import mywebapp.utils.MyFactory;
 
@@ -90,6 +91,8 @@ public class CreerProduitForm extends ActionForm {
 				}
 			} catch (final NumberFormatException nfe) {
 				errors.add("idProduit", new ActionMessage("erreur.reference.incorrect"));
+			} catch (final DAOException e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -101,9 +104,9 @@ public class CreerProduitForm extends ActionForm {
 			errors.add("prixProduit", new ActionMessage("erreur.prix.obligatoire"));
 		} else {
 			try {
-				Integer.parseInt(prixProduit);
+				Double.parseDouble(prixProduit);
 			} catch (final NumberFormatException nfe) {
-				errors.add("prixProduitProduit", new ActionMessage("erreur.reference.incorrect"));
+				errors.add("prixProduitProduit", new ActionMessage("erreur.prix.incorrect"));
 			}
 		}
 

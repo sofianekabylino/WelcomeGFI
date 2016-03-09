@@ -10,16 +10,17 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * Action qui sert à afficher le formulaire de création d'un produit
- *
+ * 
  */
 public class AffichageFormCreationProduitAction extends Action {
 
 	/**
-	 * renvoi succes pour éxécuter un forward qui va nous 
-	 * afficher le formulaire de création de produit
+	 * renvoi succes pour éxécuter un forward qui va nous afficher le formulaire
+	 * de création de produit
 	 */
-	public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest req, final HttpServletResponse res) {
+	public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest req,
+			final HttpServletResponse res) {
 
-		return mapping.findForward("succes");
+		return mapping.findForward(LoginAction.MSG_SUCCES);
 	}
 }

@@ -9,7 +9,8 @@ import org.apache.struts.action.ActionMessage;
 
 /**
  * 
- * Permet de recuperer les donnees du formulaire de login, valider et remettre a 0.
+ * Permet de recuperer les donnees du formulaire de login, valider et remettre a
+ * 0.
  * 
  */
 public class LoginForm extends ActionForm {

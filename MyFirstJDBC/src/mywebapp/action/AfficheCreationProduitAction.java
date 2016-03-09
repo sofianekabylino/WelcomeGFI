@@ -18,7 +18,8 @@ import org.apache.struts.action.ActionMapping;
 public class AfficheCreationProduitAction extends Action {
 
 	@Override
-	public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest req, final HttpServletResponse res) {
-		return mapping.findForward("succes");
+	public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest req,
+			final HttpServletResponse res) {
+		return mapping.findForward(LoginAction.MSG_SUCCES);
 	}
 }
