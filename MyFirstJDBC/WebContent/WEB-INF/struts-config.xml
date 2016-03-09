@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config
+PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+"http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+	<form-beans type="org.apache.struts.action.ActionFormBean">
+		<form-bean name="loginForm" type="mywebapp.bean.form.LoginForm" />
+		<form-bean name="creerProduitForm" type="mywebapp.bean.form.CreerProduitForm" />
+	</form-beans>
+	<action-mappings type="org.apache.struts.action.ActionMapping">
+		<action path="/login" parameter="" input="/jsp/index.jsp"
+			scope="request" name="loginForm" type="mywebapp.action.LoginAction">
+			<forward name="succes" path="/afficheCatalogue.do" redirect="false" />
+			<forward name="echec" path="/jsp/index.jsp" redirect="false" />
+		</action>
+		<action path="/afficheCatalogue" scope="request"
+			type="mywebapp.action.AfficheCatalogueAction">
+			<forward name="succes" path="/jsp/catalogue.jsp" redirect="false" />
+		</action>
+		<action path="/affichePanier" scope="request"
+			type="mywebapp.action.AffichePanierAction">
+			<forward name="succes" path="/jsp/panier.jsp" redirect="false" />
+		</action>
+		<action path="/afficheCreationProduit" scope="request"
+			type="mywebapp.action.AfficheCreationProduitAction">
+			<forward name="succes" path="/jsp/creationProduit.jsp" redirect="false" />
+		</action>
+		<action path="/ajoutProduit" scope="request" name="ajoutProduit" 
+			type="mywebapp.action.ModifiePanierAction">
+            <forward name="succes" path="/afficheCatalogue.do" redirect="false" />
+            <forward name="echec" path="/jsp/erreur.jsp" redirect="false" />
+		</action>
+		<action path="/suppressionProduit" scope="request" name="suppressionProduit" 
+			type="mywebapp.action.ModifiePanierAction">
+            <forward name="succes" path="/affichePanier.do" redirect="false" />
+            <forward name="echec" path="/jsp/erreur.jsp" redirect="false" />
+		</action>
+		<action path="/viderPanier"	scope="request" type="mywebapp.action.ViderPanierAction">
+			<forward name="succes" path="/afficheCatalogue.do" redirect="false" />
+		</action>
+		<action path="/affichageFormCreationProduit" scope="request"
+			type="mywebapp.action.AffichageFormCreationProduitAction">
+			<forward name="succes" path="/jsp/creerProduit.jsp" redirect="false" />
+		</action>
+		<action path="/creerProduit" parameter="" input="/jsp/creerProduit.jsp"
+			scope="request" name="creerProduitForm" type="mywebapp.action.CreerProduitAction">
+			<forward name="succes" path="/afficheCatalogue.do" redirect="false" />
+		</action>
+		
+	</action-mappings>
+	<message-resources parameter=".i18n.message" />
+
+</struts-config>
